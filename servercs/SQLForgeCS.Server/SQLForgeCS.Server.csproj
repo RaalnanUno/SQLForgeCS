@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
+  </ItemGroup>
+
+    <Target Name="BuildReactUi" BeforeTargets="Build">
+    <Message Importance="high" Text="Building React UI (reactui)..." />
+    <Exec WorkingDirectory="..\..\reactui" Command="npm install" Condition="!Exists('..\..\reactui\node_modules')" />
+    <Exec WorkingDirectory="..\..\reactui" Command="npm run build" />
+  </Target>
+
+</Project>

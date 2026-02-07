@@ -1,0 +1,127 @@
+{
+  "info": {
+    "name": "SQLForgeCS (No Electron) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "http://localhost:5111/health" }
+      }
+    },
+    {
+      "name": "Open (Windows Auth)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "http://localhost:5111/api/db/open" },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Local Windows\",\n  \"server\": \".\",\n  \"database\": \"master\",\n  \"auth\": { \"kind\": \"windows\" },\n  \"encrypt\": false,\n  \"trustServerCertificate\": true,\n  \"connectionString\": \"\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Open (SQL Auth)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "http://localhost:5111/api/db/open" },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Local SQL Login\",\n  \"server\": \".\",\n  \"database\": \"master\",\n  \"auth\": { \"kind\": \"sql\", \"user\": \"sa\", \"password\": \"YOUR_PASSWORD\" },\n  \"encrypt\": false,\n  \"trustServerCertificate\": true,\n  \"connectionString\": \"\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Close",
+      "request": {
+        "method": "POST",
+        "url": { "raw": "http://localhost:5111/api/db/close" }
+      }
+    },
+    {
+      "name": "List Databases",
+      "request": {
+        "method": "POST",
+        "url": { "raw": "http://localhost:5111/api/db/listDatabases" }
+      }
+    },
+    {
+      "name": "List Tables",
+      "request": {
+        "method": "POST",
+        "url": { "raw": "http://localhost:5111/api/db/listTables" }
+      }
+    },
+    {
+      "name": "List Views",
+      "request": {
+        "method": "POST",
+        "url": { "raw": "http://localhost:5111/api/db/listViews" }
+      }
+    },
+    {
+      "name": "Query",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "http://localhost:5111/api/db/query" },
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"sql\": \"SELECT @@SERVERNAME AS ServerName, DB_NAME() AS DatabaseName;\" }"
+        }
+      }
+    },
+    {
+      "name": "Describe Table",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "http://localhost:5111/api/db/describeTable" },
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"fullName\": \"dbo.YourTable\" }"
+        }
+      }
+    },
+    {
+      "name": "Get Primary Key",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "http://localhost:5111/api/db/getPrimaryKey" },
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"fullName\": \"dbo.YourTable\" }"
+        }
+      }
+    },
+    {
+      "name": "Update Cell (by PK)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "http://localhost:5111/api/db/updateCell" },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fullName\": \"dbo.YourTable\",\n  \"pk\": { \"Id\": 1 },\n  \"column\": \"SomeColumn\",\n  \"value\": \"New Value\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Insert Row",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "http://localhost:5111/api/db/insertRow" },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fullName\": \"dbo.YourTable\",\n  \"values\": {\n    \"SomeColumn\": \"Hello\",\n    \"AnotherColumn\": 123\n  }\n}"
+        }
+      }
+    }
+  ]
+}
